@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanse Woordenschat Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .quiz-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .answers {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .answers li {
+            margin: 10px 0;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        #launchBtn {
+            background-color: #2196F3;
+            width: auto;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        #launchBtn:hover {
+            background-color: #0b7dda;
+        }
+
+        #quizForm {
+            display: none;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Japanse Woordenschat Quiz</h1>
+    <button id="launchBtn" class="button" onclick="startQuiz()">Start Quiz</button>
+
+    <form id="quizForm">
+        <div class="question">
+            <label for="q1">1. Wat betekent "あした"?</label>
+            <ul class="answers">
+                <li><input type="radio" name="q1" value="Morgen"> Morgen</li>
+                <li><input type="radio" name="q1" value="Sterven"> Sterven</li>
+                <li><input type="radio" name="q1" value="Klein"> Klein</li>
+                <li><input type="radio" name="q1" value="Wat"> Wat</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <label for="q2">2. Wat betekent "みせ"?</label>
+            <ul class="answers">
+                <li><input type="radio" name="q2" value="Winkel"> Winkel</li>
+                <li><input type="radio" name="q2" value="Eén"> Eén</li>
+                <li><input type="radio" name="q2" value="Morgen"> Morgen</li>
+                <li><input type="radio" name="q2" value="Liefde"> Liefde</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <label for="q3">3. Wat betekent "ともだち"?</label>
+            <ul class="answers">
+                <li><input type="radio" name="q3" value="Vriend"> Vriend</li>
+                <li><input type="radio" name="q3" value="Hond"> Hond</li>
+                <li><input type="radio" name="q3" value="Winkel"> Winkel</li>
+                <li><input type="radio" name="q3" value="Brood"> Brood</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <label for="q4">4. Wat betekent "パン"?</label>
+            <ul class="answers">
+                <li><input type="radio" name="q4" value="Brood"> Brood</li>
+                <li><input type="radio" name="q4" value="Vriend"> Vriend</li>
+                <li><input type="radio" name="q4" value="Zee"> Zee</li>
+                <li><input type="radio" name="q4" value="Hond"> Hond</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <label for="q5">5. Wat betekent "あさ"?</label>
+            <ul class="answers">
+                <li><input type="radio" name="q5" value="Ochtend"> Ochtend</li>
+                <li><input type="radio" name="q5" value="Zomer"> Zomer</li>
+                <li><input type="radio" name="q5" value="Station"> Station</li>
+                <li><input type="radio" name="q5" value="Nieuw"> Nieuw</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <label for="q6">6. Wat betekent "あたらしい"?</label>
+            <ul class="answers">
+                <li><input type="radio" name="q6" value="Nieuw"> Nieuw</li>
+                <li><input type="radio" name="q6" value="Interessant"> Interessant</li>
+                <li><input type="radio" name="q6" value="Klein"> Klein</li>
+                <li><input type="radio" name="q6" value="Ochtend"> Ochtend</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <label for="q7">7. Wat betekent "おもしろい"?</label>
+            <ul class="answers">
+                <li><input type="radio" name="q7" value="Interessant"> Interessant</li>
+                <li><input type="radio" name="q7" value="Klein"> Klein</li>
+                <li><input type="radio" name="q7" value="Liefde"> Liefde</li>
+                <li><input type="radio" name="q7" value="Zout"> Zout</li>
+            </ul>
+        </div>
+
+        <button type="button" class="button" onclick="checkAnswers()">Verstuur Antwoorden</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function startQuiz() {
+        document.getElementById('quizForm').style.display = 'block';
+        document.getElementById('launchBtn').style.display = 'none';
+    }
+
+    function checkAnswers() {
+        const correctAnswers = {
+            q1: "Morgen",
+            q2: "Winkel",
+            q3: "Vriend",
+            q4: "Brood",
+            q5: "Ochtend",
+            q6: "Nieuw",
+            q7: "Interessant"
+        };
+
+        let score = 0;
+        const form = document.getElementById('quizForm');
+        const resultDiv = document.getElementById('result');
+
+        for (let i = 1; i <= 7; i++) {
+            const question = form.querySelector(`input[name="q${i}"]:checked`);
+            if (question && question.value === correctAnswers[`q${i}`]) {
+                score++;
+            }
+        }
+
+        resultDiv.innerHTML = `Je score is: ${score} van de 7.`;
+    }
+</script>
+
+</body>
+</html>
